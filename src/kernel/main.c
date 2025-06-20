@@ -1,8 +1,10 @@
+#include "vga.h"
 
 void kernel_main() {
-	char* vga = (char*) 0xB8000;
-	vga[0] = 'H';
-	vga[1] = 0xF0;
+	vga_clear_screen();
+
+	vga_set_color(VGA_COLOR_GREEN, VGA_COLOR_BLACK);
+	vga_put_string("Hello!");
 
 	while (1);
 }
