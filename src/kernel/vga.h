@@ -2,6 +2,7 @@
 #define VGA_H
 
 #include <stdint.h>
+#include "string.h"
 
 #define VGA_WIDTH	80
 #define VGA_HEIGHT	25
@@ -33,6 +34,6 @@ void vga_move_cursor(int x, int y);
 void vga_put_char(char c);
 void vga_put_string(const char* str);
 void vga_put_hex(uint8_t value);
-void serial_put_dec(uint8_t value);
+void vga_put_dec(uint8_t value);
 
 #endif

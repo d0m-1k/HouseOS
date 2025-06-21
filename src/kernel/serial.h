@@ -2,6 +2,7 @@
 #define SERIAL_H
 
 #include "ports.h"
+#include "string.h"
 
 #define COM1_PORT 0x3f8
 
