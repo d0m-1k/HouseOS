@@ -9,13 +9,25 @@ void serial_init() {
 	write_port(COM1_PORT + 2, 0xC7); // Включаем FIFO
 }
 
-void serial_put_chat(char c) {
+void serial_put_char(char c) {
 	while ((read_port(COM1_PORT + 5) & 0x20) == 0);
 	write_port(COM1_PORT, c);
 }
 
+void serial_put_hex(uint8_t value) {
+	char hex[] = "0123456789ABCDEF";
+	serial_put_char(hex[value >> 4]);
+	serial_put_char(hex[value & 0x0F]);
+}
+
+void serial_put_dec(uint8_t value) {
+	if (value >= 100) serial_put_char('0' + value / 100);
+	if (value >= 10) serial_put_char('0' + (value / 10) % 10);
+	serial_put_char('0' + value % 10);
+}
+
 void serial_put_string(const char* str) {
 	while (*str) {
-		serial_put_chat(*str++);
+		serial_put_char(*str++);
 	}
 }
