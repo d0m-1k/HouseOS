@@ -92,7 +92,7 @@ void vga_put_hex(uint8_t value) {
 }
 
 void serial_put_dec(uint8_t value) {
-	if (value >= 100) serial_put_char('0' + value / 100);
-	if (value >= 10) serial_put_char('0' + (value / 10) % 10);
+	if (value >= 100) vga_put_char('0' + value / 100);
+	if (value >= 10) vga_put_char('0' + (value / 10) % 10);
 	serial_put_char('0' + value % 10);
 }
