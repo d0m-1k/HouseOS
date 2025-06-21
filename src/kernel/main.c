@@ -1,5 +1,7 @@
 #include "vga.h"
 #include "serial.h"
+#include "idt.h"
+#include "keyboard.h"
 
 void kernel_main() {
 	vga_clear_screen();
@@ -10,6 +12,10 @@ void kernel_main() {
 
 	serial_init();
 	serial_put_string("OS started\n");
+
+	init_idt();
+	init_keyboard();
+	asm volatile("sti");
 
 	while (1);
 }

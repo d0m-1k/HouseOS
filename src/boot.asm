@@ -11,9 +11,11 @@ multiboot:
 global start
 global write_port
 global read_port
+global idt_load
+global keyboard_handler
 
 extern kernel_main
-extern kernel_keyboard_isr
+extern kernel_keyboard_handler
 
 start:
 	cli
@@ -31,6 +33,17 @@ write_port:
 	mov al, [esp + 4 + 4]
 	out dx, al
 	ret
+
+idt_load:
+	mov edx, [esp + 4]
+	lidt [edx]
+	ret
+
+keyboard_handler:
+	pushad
+	call kernel_keyboard_handler
+	popad
+	iretd
 
 section .bss
 
