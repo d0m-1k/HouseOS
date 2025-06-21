@@ -20,6 +20,8 @@ extern kernel_keyboard_handler
 start:
 	cli
 	mov esp, stack_space
+	push ebx
+	push eax
 	call kernel_main
 	hlt
 
@@ -47,5 +49,5 @@ keyboard_handler:
 
 section .bss
 
-resb 8192
+resb 16384
 stack_space:

@@ -1,6 +1,6 @@
 #include "serial.h"
 
-void serial_init() {
+void init_serial() {
 	write_port(COM1_PORT + 1, 0x00); // Отключаем прерывания
 	write_port(COM1_PORT + 3, 0x80); // Включаем DLAB
 	write_port(COM1_PORT + 0, 0x03); // Устанавливаем скорость 38400 baud
