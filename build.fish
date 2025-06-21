@@ -11,4 +11,4 @@ ld -m elf_i386 -T src/linker.ld -o build/kernel.bin build/*.o
 
 rm build/*.o -f
 
-qemu-system-x86_64 -kernel build/kernel.bin -display vnc=:0
+qemu-system-x86_64 -kernel build/kernel.bin -display vnc=:0 -serial stdio
