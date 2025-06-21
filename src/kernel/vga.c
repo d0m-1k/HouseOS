@@ -84,3 +84,15 @@ void vga_put_string(const char* str) {
 		vga_put_char(*str++);
 	}
 }
+
+void vga_put_hex(uint8_t value) {
+	char hex[] = "0123456789ABCDEF";
+	vga_put_char(hex[value >> 4]);
+	vga_put_char(hex[value & 0x0F]);
+}
+
+void serial_put_dec(uint8_t value) {
+	if (value >= 100) serial_put_char('0' + value / 100);
+	if (value >= 10) serial_put_char('0' + (value / 10) % 10);
+	serial_put_char('0' + value % 10);
+}

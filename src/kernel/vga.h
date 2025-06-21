@@ -32,5 +32,7 @@ void vga_clear_screen(void);
 void vga_move_cursor(int x, int y);
 void vga_put_char(char c);
 void vga_put_string(const char* str);
+void vga_put_hex(uint8_t value);
+void serial_put_dec(uint8_t value);
 
 #endif
