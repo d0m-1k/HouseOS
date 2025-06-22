@@ -11,6 +11,9 @@ ld -m elf_i386 -T src/linker.ld -o build/kernel.bin build/*.o
 
 rm build/*.o -f
 
+cp build/kernel.bin build/iso/boot/kernel
+grub-mkrescue build/iso -o build/os.iso
+
 echo "Starting qemu"
-qemu-system-x86_64 -kernel build/kernel.bin -display vnc=:0 -serial stdio -no-reboot
+qemu-system-x86_64 -hda build/os.iso -display vnc=:0 -serial stdio
 echo "qemu killed"
