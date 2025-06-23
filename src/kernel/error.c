@@ -1,6 +1,6 @@
 #include "error.h"
 
-void make_kernel_panic(uint8_t error_code, uint16_t segment, uint32_t offset) {
+void make_kernel_panic(uint16_t error_code) {
 	make_kernel_panic_text();
 
 	int len = 0;
@@ -15,18 +15,9 @@ void make_kernel_panic(uint8_t error_code, uint16_t segment, uint32_t offset) {
 	vga_put_char(' ');
 	vga_set_color(VGA_COLOR_WHITE, VGA_COLOR_BLUE);
 
-	vga_move_cursor(22, 8);
-	vga_put_hex(error_code);
-
-	vga_move_cursor(41, 8);
-	vga_put_hex(segment >> 8);
-	vga_put_hex(segment & 0xFF);
-
-	vga_move_cursor(46, 8);
-	vga_put_hex((offset >> 24) & 0xFF);
-	vga_put_hex((offset >> 16) & 0xFF);
-	vga_put_hex((offset >> 8) & 0xFF);
-	vga_put_hex(offset & 0xFF);
+	vga_move_cursor(28, 8);
+	vga_put_hex((error_code >> 8) & 0xFF);
+	vga_put_hex(error_code & 0xFF);
 }
 
 void make_kernel_panic_text() {
@@ -40,8 +31,8 @@ void make_kernel_panic_text() {
 	vga_put_string("                                                                                ");
 	vga_put_string("                                                                                ");
 	vga_put_string("                                                                                ");
-	vga_put_string("    A fatal exception __ has occurred at ____:________. The current             ");
-	vga_put_string("    application will be terminated.                                             ");
+	vga_put_string("        A fatal exception 0x____ has occurred. The current application          ");
+	vga_put_string("        will be terminated.                                                     ");
 	vga_put_string("                                                                                ");
 	vga_put_string("    *   Press any key to terminate the currnet application                      ");
 	vga_put_string("    *   Press CTRL+ALT+DEL again to restart your computer. You will             ");

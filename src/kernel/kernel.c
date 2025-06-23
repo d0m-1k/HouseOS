@@ -23,7 +23,7 @@ void kernel_main(uint32_t magic, multiboot_info_t* mboot_info) {
 	asm volatile("sti");
 
 	if(magic != MULTIBOOT_BOOTLOADER_MAGIC) {
-		make_kernel_panic(0x30);
+		make_kernel_panic(0x3000);
 		return;
 	}
 
